@@ -1,0 +1,49 @@
+/* General: fondo, color, reset */
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: #2F4F30 !important;
+    color: white;
+    font-family: sans-serif;
+  }
+  
+  /* Encabezado del juego */
+  .titulo {
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 20px;
+    font-size: 28px;
+  }
+  
+  /* Fondo común para secciones del juego */
+  .fondo-juego {
+    background-color: #2F4F30;
+  }
+  
+  /* Cartas superpuestas y centradas */
+  .zona-cartas {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    min-height: 100px;
+  }
+  
+  .carta {
+    width: 120px;
+    margin-left: -60px;
+    position: relative;
+    left: 60px;
+    transition: transform 0.2s ease;
+  }
+  
+  .carta:hover {
+    transform: scale(1.05);
+  }
+
+  #fondo_completo{
+    background-color: #2F4F30 !important;
+  }
+  

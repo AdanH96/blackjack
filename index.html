@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlackJack</title>
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+</head>
+<body>
+
+  <!-- ENCABEZADO -->
+  <header class="titulo">
+    BlackJack
+  </header>
+
+  <div class="container">
+
+    <!-- BOTONES DE ACCIÓN -->
+    <div class="row justify-content-center fondo-juego py-3">
+      <div class="col-md-6 text-center">
+        <button class="btn btn-danger m-2">Nuevo juego</button>
+        <button class="btn btn-primary m-2">Pedir carta</button>
+        <button class="btn btn-primary m-2">Detener</button>
+      </div>
+    </div>
+
+    <!-- JUGADOR -->
+    <div class="fondo-juego text-white mt-4 py-3">
+      <div class="row justify-content-center">
+        <div class="col">
+          <h2>Jugador 1 - <small>0</small></h2>
+          <div id="jugador-cartas" class="zona-cartas">
+            <img class="carta" src="assets/cartas/10S.png" alt="carta" />
+            <img class="carta" src="assets/cartas/10C.png" alt="carta" />
+            <img class="carta" src="assets/cartas/10C.png" alt="carta" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPUTADORA -->
+    <div class="fondo-juego text-white mt-4 py-3">
+      <div class="row justify-content-center">
+        <div class="col">
+          <h2>Computadora - <small>0</small></h2>
+          <div id="juego-computadora" class="zona-cartas">
+            <img class="carta" src="assets/cartas/4C.png" alt="carta" />
+            <img class="carta" src="assets/cartas/4C.png" alt="carta" />
+            <img class="carta" src="assets/cartas/4C.png" alt="carta" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"></script>
+    <script src="js/juego.js" ></script>
+
+</body>
+</html>
