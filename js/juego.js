@@ -27,5 +27,15 @@ crearBaraja = () =>{
 
 
 
+const pedirCarta = () =>{
+    if(baraja.length === 0){
+        throw 'No hy cartas en el deck';
+    }
+    cartaSolicitada = baraja.pop();
+    return cartaSolicitada;
+}
+
 const baraja = crearBaraja();
+cartaObtenida =  pedirCarta();
+console.log(cartaObtenida);
 console.log(baraja);
