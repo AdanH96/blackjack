@@ -1,6 +1,7 @@
 
 //variables
 let baraja = [];
+let cartaSolicitada;
 const cartasBasicas = ['C','H','S','D'];
 const cartasEspeciales = ['A','J','Q','K'];
 let contadorJugador = 0; //asignamos let porque en el momento de hacer contador += contador estamos reasignando su valor en memoria
@@ -13,7 +14,8 @@ const botonPedirCarta = document.querySelector('#botonPedirCarta');
 const botonDetener =  document.querySelector('#botonDetener');
 const arrayPuntuaciones = document.querySelectorAll('small');
 const smallJugador = arrayPuntuaciones[0];
-
+const zonaCartasJugador = document.querySelector('#jugador-cartas');
+const zonaCartasComputadora = document.querySelector('#juego-computadora');
 //funciones
 crearBaraja = () =>{
 
@@ -37,14 +39,15 @@ crearBaraja = () =>{
 }
 
 
+//función para pedir la carta
 const pedirCarta = () =>{
     if(baraja.length === 0){
         throw 'No hy cartas en el deck';
     }
-    let cartaSolicitada = baraja.pop();
-    return cartaSolicitada;
+        cartaSolicitada = baraja.pop(); 
 }
 
+//función para recoger el valor de la carta
 function valorCarta(carta) {
     const valorNumerico = carta.slice(0, -1); // saca el número/letra sin el palo
 
@@ -59,8 +62,16 @@ function valorCarta(carta) {
     return 10;
 }
 
-//eventos:
+//función para crear la carta en el html
+function aniadirCarta(zona){
+    let carta = document.createElement('img');
+    carta.src= `assets/cartas/${cartaSolicitada}.png` 
+    carta.classList.add('carta');
+    carta.alt = 'carta';
+    zona === zonaCartasJugador ? zonaCartasJugador.append(carta) : zonaCartasComputadora.append(carta);
+}
 
+//eventos:
 botonNuevoJuego.addEventListener('click', () =>{
     baraja = crearBaraja();
 });
@@ -68,15 +79,22 @@ botonNuevoJuego.addEventListener('click', () =>{
 
 botonPedirCarta.addEventListener('click', () =>{
 
-
-    //Empezar a asignar cartas al DOM 
-    
-    cartaPedida = pedirCarta();
-    contadorJugador += valorCarta(cartaPedida);
-    if(contadorJugador >=21){
-
-        alert('El jugador 1 ha ganado');
+    pedirCarta();
+    if(cartaSolicitada.length < 1){
+        alert('No hay cartas en el deck');
+        return;
     }
+    console.log(cartaSolicitada);
+    aniadirCarta(zonaCartasJugador);
+
+    //*HAY QUE CAMBIAR AHORA LA VARIABLE DE RETORNO DE LA FUNCIÓN DEL VALOR DE LA CARTA Y COGERLA DE LA GLOBAL
+ 
+    // zonaCartasJugador.append(cartaHtml);
+    // contadorJugador += valorCarta(cartaPedida);
+    // if(contadorJugador >=21){
+
+    //     alert('El jugador 1 ha ganado');
+    // }
     
     
 
