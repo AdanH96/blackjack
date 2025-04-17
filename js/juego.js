@@ -1,7 +1,9 @@
 
 //variables
 let baraja = [];
+let arrayComputadora = [];
 let cartaSolicitada;
+let cartaSolicitadaComputadora;
 const cartasBasicas = ['C','H','S','D'];
 const cartasEspeciales = ['A','J','Q','K'];
 let contadorJugador = 0; //asignamos let porque en el momento de hacer contador += contador estamos reasignando su valor en memoria
@@ -14,6 +16,7 @@ const botonPedirCarta = document.querySelector('#botonPedirCarta');
 const botonDetener =  document.querySelector('#botonDetener');
 const arrayPuntuaciones = document.querySelectorAll('small');
 const smallJugador = arrayPuntuaciones[0];
+const smallComputadora = arrayPuntuaciones[1];
 const zonaCartasJugador = document.querySelector('#jugador-cartas');
 const zonaCartasComputadora = document.querySelector('#juego-computadora');
 //funciones
@@ -45,6 +48,7 @@ const pedirCarta = () =>{
         throw 'No hy cartas en el deck';
     }
         cartaSolicitada = baraja.pop(); 
+        cartaSolicitadaComputadora = baraja.pop();
 }
 
 //función para recoger el valor de la carta
@@ -68,10 +72,36 @@ function aniadirCarta(zona){
     carta.src= `assets/cartas/${cartaSolicitada}.png` 
     carta.classList.add('carta');
     carta.alt = 'carta';
-    zona === zonaCartasJugador ? zonaCartasJugador.append(carta) : zonaCartasComputadora.append(carta);
+    if (zona === zonaCartasJugador){
+        zonaCartasJugador.append(carta);
+    }
+}
+
+function ganarPartida(){
+
+    const puntosGanadores = 21;
+    if(contadorJugador >= puntosGanadores){
+        alert('Ha ganado el Jugador, ¡ENHORABUENA!')
+        limpiarPartida();
+    }else if (contadorComputadora >= 21){
+        
+        for(carta of arrayComputadora){
+            zonaCartasComputadora.append(carta);
+        }
+        smallComputadora.innerText=parseInt(contadorComputadora);
+        alert('Ha ganado la computadora, ¡lo sentimos!')
+        limpiarPartida();
+    }
+}
+
+function limpiarPartida(){
+    baraja=[];
+    contadorJugador=0;
+    contadorComputadora=0;
 }
 
 //eventos:
+
 botonNuevoJuego.addEventListener('click', () =>{
     baraja = crearBaraja();
 });
@@ -84,26 +114,28 @@ botonPedirCarta.addEventListener('click', () =>{
         alert('No hay cartas en el deck');
         return;
     }
-    console.log(cartaSolicitada);
+
     aniadirCarta(zonaCartasJugador);
+    contadorJugador += valorCarta(cartaSolicitada);
+    smallJugador.innerText=parseInt(contadorJugador); //*
 
-    //*HAY QUE CAMBIAR AHORA LA VARIABLE DE RETORNO DE LA FUNCIÓN DEL VALOR DE LA CARTA Y COGERLA DE LA GLOBAL
- 
-    // zonaCartasJugador.append(cartaHtml);
-    // contadorJugador += valorCarta(cartaPedida);
-    // if(contadorJugador >=21){
+//turno computadora;
 
-    //     alert('El jugador 1 ha ganado');
-    // }
+    pedirCarta();
+    if(cartaSolicitadaComputadora.length < 1){
+        alert('No hay cartas en el deck');
+        return;
+    }
+    arrayComputadora.push(cartaSolicitadaComputadora);
+
     
-    
+    contadorComputadora += valorCarta(cartaSolicitadaComputadora);
+    ganarPartida();
 
     /*Como el array se guarda en el heap, smallJugador aunque sea una variable directa que asigna el valor del array puntuaciones
     se le puede pasar la asignación directa por innerText y parsear a integer el contenido del contador.
     NO HACE FALTA COGER A arrayPuntuaciones[0] directamente, aunque se podría. Pero aprovechamos el valor por referencia.
-    */
-    smallJugador.innerText=parseInt(contadorJugador);
-    
+    */ 
 });
 
 
