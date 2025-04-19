@@ -61,17 +61,27 @@ function aniadirCarta(zona, carta) {
 }
 
 function ganarPartida() {
+
+    timeout = 3000;
+
     const puntosGanadores = 21;
+    
     if (contadorJugador >= puntosGanadores) {
         alert('Ha ganado el Jugador, ¡ENHORABUENA!');
-        limpiarPartida();
+        setTimeout(() => {
+            limpiarPartida(); 
+        }, timeout);
+        
     } else if (contadorComputadora >= 21) {
         for (let carta of arrayComputadora) {
             aniadirCarta(zonaCartasComputadora, carta);
         }
         smallComputadora.innerText = parseInt(contadorComputadora);
         alert('Ha ganado la computadora, ¡lo sentimos!');
-        limpiarPartida();
+        setTimeout(() => {
+            limpiarPartida();
+        }, timeout);
+        
     }
 }
 
@@ -84,12 +94,14 @@ function limpiarPartida() {
     smallComputadora.innerText = '';
     zonaCartasJugador.innerHTML = '';
     zonaCartasComputadora.innerHTML = '';
+    botonNuevoJuego.disabled = false;
 }
 
 // eventos
 botonNuevoJuego.addEventListener('click', () => {
     limpiarPartida();
     baraja = crearBaraja();
+    botonNuevoJuego.disabled = true;
 });
 
 botonPedirCarta.addEventListener('click', () => {
@@ -128,5 +140,7 @@ botonDetener.addEventListener('click', () => {
     setTimeout(() => {
         limpiarPartida();
         baraja = crearBaraja();
+        botonNuevoJuego.disabled = false;
     }, timeout);
+    
 });
