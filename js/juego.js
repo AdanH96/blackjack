@@ -1,5 +1,5 @@
 
-const juego =()=> {
+let juego = (() =>{
     // 'use strict'
     // variables
     let baraja = [];
@@ -154,5 +154,5 @@ const juego =()=> {
     return {
         empezar : iniciarPartida
     }
-};
+});
 
